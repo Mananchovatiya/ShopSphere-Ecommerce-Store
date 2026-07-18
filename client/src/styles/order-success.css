@@ -1,0 +1,58 @@
+/* order-success.css */
+
+.order-success {
+  padding: 4rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 0.4s ease;
+}
+
+.success-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  color: var(--color-success);
+  font-size: 2rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.success-card h1 {
+  font-size: 1.6rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.order-id {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  word-break: break-all;
+  margin-top: 0.75rem;
+}
+.success-note {
+  color: var(--color-text-muted);
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+.success-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}

@@ -1,0 +1,32 @@
+/* home.css */
+
+.banner-section { padding-top: 1rem; }
+
+.offer-banner {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-md);
+}
+.offer-banner h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+.offer-banner p {
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+.offer-banner .btn-primary {
+  background: #fff;
+  color: var(--color-primary);
+}
+.offer-banner .btn-primary:hover {
+  background: #f8fafc;
+  color: #fff;
+}
