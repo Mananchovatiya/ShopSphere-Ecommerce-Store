@@ -49,48 +49,50 @@ function AdminOrders() {
         <p>Loading...</p>
       ) : (
         <div className="card no-pad">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Customer</th>
-                <th>Items</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {visible.map((o) => (
-                <tr key={o._id}>
-                  <td>#{o._id.slice(-6)}</td>
-                  <td>
-                    <div className="cell-name">{o.user?.name || "—"}</div>
-                    <div className="cell-sub">{o.user?.email}</div>
-                  </td>
-                  <td>{o.items.reduce((n, i) => n + i.quantity, 0)}</td>
-                  <td>{formatCurrency(o.totalPrice)}</td>
-                  <td>
-                    <select
-                      value={o.status}
-                      onChange={(e) => handleStatus(o._id, e.target.value)}
-                      className={`status-select status-${o.status.toLowerCase()}`}
-                    >
-                      {STATUSES.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                  </td>
-                  <td>{new Date(o.createdAt).toLocaleDateString()}</td>
-                </tr>
-              ))}
-              {visible.length === 0 && (
+          <div className="table-scroll">
+            <table className="admin-table">
+              <thead>
                 <tr>
-                  <td colSpan={6} className="empty">No orders found.</td>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Date</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {visible.map((o) => (
+                  <tr key={o._id}>
+                    <td>#{o._id.slice(-6)}</td>
+                    <td>
+                      <div className="cell-name">{o.user?.name || "—"}</div>
+                      <div className="cell-sub">{o.user?.email}</div>
+                    </td>
+                    <td>{o.items.reduce((n, i) => n + i.quantity, 0)}</td>
+                    <td>{formatCurrency(o.totalPrice)}</td>
+                    <td>
+                      <select
+                        value={o.status}
+                        onChange={(e) => handleStatus(o._id, e.target.value)}
+                        className={`status-select status-${o.status.toLowerCase()}`}
+                      >
+                        {STATUSES.map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </select>
+                    </td>
+                    <td>{new Date(o.createdAt).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+                {visible.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="empty">No orders found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

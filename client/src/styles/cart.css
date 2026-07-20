@@ -28,34 +28,46 @@
   padding: 0.85rem;
   transition: box-shadow var(--transition-fast);
 }
-.cart-item:hover { box-shadow: var(--shadow-sm); }
+
+.cart-item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
 .cart-item img {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: var(--radius-sm);
 }
+
 .cart-item-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   min-width: 0;
 }
+
 .cart-item-name {
   font-weight: 600;
   color: var(--color-secondary);
 }
-.cart-item-name:hover { color: var(--color-primary); }
+
+.cart-item-name:hover {
+  color: var(--color-primary);
+}
+
 .cart-item-price {
   color: var(--color-text-muted);
   font-size: 0.9rem;
 }
+
 .cart-item-total {
   font-weight: 700;
   color: var(--color-primary);
   min-width: 80px;
   text-align: right;
 }
+
 .cart-item-remove {
   width: 32px;
   height: 32px;
@@ -63,6 +75,7 @@
   color: var(--color-text-muted);
   transition: background var(--transition-fast), color var(--transition-fast);
 }
+
 .cart-item-remove:hover {
   background: #fef2f2;
   color: var(--color-danger);
@@ -79,26 +92,41 @@
   flex-direction: column;
   gap: 0.25rem;
 }
+
 .cart-summary h3 {
   margin-bottom: 0.75rem;
   color: var(--color-secondary);
 }
+
 .coupon {
   display: flex;
   gap: 0.5rem;
   margin-top: 1rem;
 }
-.coupon input { flex: 1; }
+
+.coupon input {
+  flex: 1;
+}
+
 .coupon-msg {
   font-size: 0.85rem;
   color: var(--color-text-muted);
   margin-top: 0.5rem;
 }
-.cart-summary .btn-block { margin-top: 1rem; }
+
+.cart-summary .btn-block {
+  margin-top: 1rem;
+}
 
 @media (max-width: 900px) {
-  .cart-layout { grid-template-columns: 1fr; }
-  .cart-summary { position: static; }
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+
   .cart-item {
     grid-template-columns: 70px 1fr auto;
     grid-template-areas:
@@ -106,9 +134,35 @@
       "img qty total";
     gap: 0.75rem;
   }
-  .cart-item img { grid-area: img; }
-  .cart-item-info { grid-area: info; }
-  .cart-item .qty-control { grid-area: qty; }
-  .cart-item-total { grid-area: total; text-align: right; }
-  .cart-item-remove { grid-area: remove; }
+
+  .cart-item img {
+    grid-area: img;
+  }
+
+  .cart-item-info {
+    grid-area: info;
+  }
+
+  .cart-item .qty-control {
+    grid-area: qty;
+  }
+
+  .cart-item-total {
+    grid-area: total;
+    text-align: right;
+  }
+
+  .cart-item-remove {
+    grid-area: remove;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+
+  .cart-summary {
+    padding: 1.25rem;
+  }
 }

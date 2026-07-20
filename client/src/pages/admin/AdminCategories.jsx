@@ -99,38 +99,40 @@ function AdminCategories() {
         <p>Loading...</p>
       ) : (
         <div className="card no-pad">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((c) => (
-                <tr key={c._id}>
-                  <td className="cell-name">{c.name}</td>
-                  <td><code>{c.slug}</code></td>
-                  <td>{c.description}</td>
-                  <td className="row-actions">
-                    <button className="btn btn-outline btn-sm" onClick={() => openEdit(c)}>
-                      Edit
-                    </button>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(c)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {categories.length === 0 && (
+          <div className="table-scroll">
+            <table className="admin-table">
+              <thead>
                 <tr>
-                  <td colSpan={4} className="empty">No categories yet.</td>
+                  <th>Name</th>
+                  <th>Slug</th>
+                  <th>Description</th>
+                  <th></th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {categories.map((c) => (
+                  <tr key={c._id}>
+                    <td className="cell-name">{c.name}</td>
+                    <td><code>{c.slug}</code></td>
+                    <td>{c.description}</td>
+                    <td className="row-actions">
+                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(c)}>
+                        Edit
+                      </button>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(c)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {categories.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="empty">No categories yet.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

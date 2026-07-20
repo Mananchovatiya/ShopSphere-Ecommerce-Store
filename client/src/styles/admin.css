@@ -163,67 +163,25 @@
 }
 
 /* Card + table */
-.admin-content .card {
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 1.5rem;
-}
-
-.admin-content .card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: var(--color-secondary);
-}
-
-.admin-content .card .card-head {
+.card .card-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-.admin-content .card .card-head h3 {
-  margin-bottom: 0;
-}
-
-.admin-content .card.no-pad {
+.card.no-pad {
   padding: 0;
   overflow: hidden;
 }
 
-/* Order status pills (used in admin tables + dashboard) */
-.admin-content .order-status {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  background: #eef2ff;
-  color: #4338ca;
-  white-space: nowrap;
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.admin-content .order-status.status-placed {
-  background: #eff6ff;
-  color: #1d4ed8;
-}
-
-.admin-content .order-status.status-shipped {
-  background: #fef3c7;
-  color: #b45309;
-}
-
-.admin-content .order-status.status-delivered {
-  background: #dcfce7;
-  color: #15803d;
-}
-
-.admin-content .order-status.status-cancelled {
-  background: #fee2e2;
-  color: #b91c1c;
+.admin-table {
+  min-width: 640px;
 }
 
 .admin-table {
@@ -521,9 +479,37 @@
   .admin-content {
     padding: 1.25rem;
   }
+}
 
-  .admin-table th:nth-child(4),
-  .admin-table td:nth-child(4) {
-    display: none;
+@media (max-width: 560px) {
+  .admin-content {
+    padding: 1rem;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kpi-value {
+    font-size: 1.4rem;
+  }
+
+  .page-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-toolbar input,
+  .admin-toolbar select {
+    min-width: 0;
+    flex: 1 1 140px;
+  }
+
+  .row-actions {
+    justify-content: flex-start;
+  }
+
+  .chart-bars {
+    height: 140px;
   }
 }

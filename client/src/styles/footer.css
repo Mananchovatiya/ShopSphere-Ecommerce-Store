@@ -59,13 +59,18 @@
 }
 
 @media (max-width: 768px) {
-  .footer-grid {
+  .footer .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 480px) {
-  .footer-grid {
+  .footer .footer-grid {
     grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .footer-about {
+    max-width: 100%;
   }
 }

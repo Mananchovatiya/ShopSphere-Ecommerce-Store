@@ -48,61 +48,62 @@ function AdminUsers() {
         <p>Loading...</p>
       ) : (
         <div className="card no-pad">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Joined</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((u) => {
-                const isMe = me?._id === u._id;
-                return (
-                  <tr key={u._id}>
-                    <td className="cell-name">
-                      {u.name} {isMe && <span className="badge-default">You</span>}
-                    </td>
-                    <td>{u.email}</td>
-                    <td>
-                      <span
-                        className={`order-status ${
-                          u.role === "admin" ? "status-shipped" : "status-placed"
-                        }`}
-                      >
-                        {u.role}
-                      </span>
-                    </td>
-                    <td>{new Date(u.createdAt).toLocaleDateString()}</td>
-                    <td className="row-actions">
-                      <button
-                        className="btn btn-outline btn-sm"
-                        onClick={() => toggleRole(u)}
-                        disabled={isMe}
-                      >
-                        {u.role === "admin" ? "Demote" : "Promote"}
-                      </button>
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => handleDelete(u)}
-                        disabled={isMe}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-              {users.length === 0 && (
+          <div className="table-scroll">
+            <table className="admin-table">
+              <thead>
                 <tr>
-                  <td colSpan={5} className="empty">No users found.</td>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Joined</th>
+                  <th></th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((u) => {
+                  const isMe = me?._id === u._id;
+                  return (
+                    <tr key={u._id}>
+                      <td className="cell-name">
+                        {u.name} {isMe && <span className="badge-default">You</span>}
+                      </td>
+                      <td>{u.email}</td>
+                      <td>
+                        <span
+                          className={`order-status ${u.role === "admin" ? "status-shipped" : "status-placed"
+                            }`}
+                        >
+                          {u.role}
+                        </span>
+                      </td>
+                      <td>{new Date(u.createdAt).toLocaleDateString()}</td>
+                      <td className="row-actions">
+                        <button
+                          className="btn btn-outline btn-sm"
+                          onClick={() => toggleRole(u)}
+                          disabled={isMe}
+                        >
+                          {u.role === "admin" ? "Demote" : "Promote"}
+                        </button>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(u)}
+                          disabled={isMe}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+                {users.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="empty">No users found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

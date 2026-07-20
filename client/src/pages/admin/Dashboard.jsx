@@ -81,32 +81,34 @@ function Dashboard() {
         {stats.recentOrders.length === 0 ? (
           <p className="muted">No orders yet.</p>
         ) : (
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Customer</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stats.recentOrders.map((o) => (
-                <tr key={o._id}>
-                  <td>#{o._id.slice(-6)}</td>
-                  <td>{o.user?.name || "—"}</td>
-                  <td>{formatCurrency(o.totalPrice)}</td>
-                  <td>
-                    <span className={`order-status status-${o.status.toLowerCase()}`}>
-                      {o.status}
-                    </span>
-                  </td>
-                  <td>{new Date(o.createdAt).toLocaleDateString()}</td>
+          <div className="table-scroll">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Date</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {stats.recentOrders.map((o) => (
+                  <tr key={o._id}>
+                    <td>#{o._id.slice(-6)}</td>
+                    <td>{o.user?.name || "—"}</td>
+                    <td>{formatCurrency(o.totalPrice)}</td>
+                    <td>
+                      <span className={`order-status status-${o.status.toLowerCase()}`}>
+                        {o.status}
+                      </span>
+                    </td>
+                    <td>{new Date(o.createdAt).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

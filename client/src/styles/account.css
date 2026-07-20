@@ -97,10 +97,12 @@
   cursor: pointer;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
+
 .account-logout:hover {
   background: var(--color-danger);
   color: #fff;
 }
+
 /* Content area */
 .account-content {
   min-width: 0;
@@ -425,5 +427,41 @@
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .account {
+    padding: 1.5rem 1rem;
+  }
+
+  .order-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .order-right {
+    text-align: left;
+    width: 100%;
+  }
+
+  .detail-items li {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "img info"
+      "img price";
+    row-gap: 0.25rem;
+  }
+
+  .detail-items img {
+    grid-area: img;
+  }
+
+  .detail-info {
+    grid-area: info;
+  }
+
+  .detail-price {
+    grid-area: price;
   }
 }

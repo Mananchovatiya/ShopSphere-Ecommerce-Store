@@ -138,50 +138,52 @@ function AdminProducts() {
         <p>Loading...</p>
       ) : (
         <div className="card no-pad">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Featured</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((p) => (
-                <tr key={p._id}>
-                  <td>
-                    <div className="cell-product">
-                      <img src={p.image} alt={p.name} />
-                      <div>
-                        <div className="cell-name">{p.name}</div>
-                        <div className="cell-sub">{p.brand}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{p.category}</td>
-                  <td>{formatCurrency(p.price)}</td>
-                  <td>{p.stock}</td>
-                  <td>{p.featured ? "Yes" : "No"}</td>
-                  <td className="row-actions">
-                    <button className="btn btn-outline btn-sm" onClick={() => openEdit(p)}>
-                      Edit
-                    </button>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(p)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {products.length === 0 && (
+          <div className="table-scroll">
+            <table className="admin-table">
+              <thead>
                 <tr>
-                  <td colSpan={6} className="empty">No products found.</td>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Featured</th>
+                  <th></th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {products.map((p) => (
+                  <tr key={p._id}>
+                    <td>
+                      <div className="cell-product">
+                        <img src={p.image} alt={p.name} />
+                        <div>
+                          <div className="cell-name">{p.name}</div>
+                          <div className="cell-sub">{p.brand}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{p.category}</td>
+                    <td>{formatCurrency(p.price)}</td>
+                    <td>{p.stock}</td>
+                    <td>{p.featured ? "Yes" : "No"}</td>
+                    <td className="row-actions">
+                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(p)}>
+                        Edit
+                      </button>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(p)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {products.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="empty">No products found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
