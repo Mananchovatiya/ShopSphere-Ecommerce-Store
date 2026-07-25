@@ -115,13 +115,15 @@ function AdminCategories() {
                     <td className="cell-name">{c.name}</td>
                     <td><code>{c.slug}</code></td>
                     <td>{c.description}</td>
-                    <td className="row-actions">
-                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(c)}>
-                        Edit
-                      </button>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(c)}>
-                        Delete
-                      </button>
+                    <td>
+                      <div className="row-actions">
+                        <button className="btn btn-outline btn-sm" onClick={() => openEdit(c)}>
+                          Edit
+                        </button>
+                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(c)}>
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

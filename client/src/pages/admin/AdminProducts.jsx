@@ -166,13 +166,15 @@ function AdminProducts() {
                     <td>{formatCurrency(p.price)}</td>
                     <td>{p.stock}</td>
                     <td>{p.featured ? "Yes" : "No"}</td>
-                    <td className="row-actions">
-                      <button className="btn btn-outline btn-sm" onClick={() => openEdit(p)}>
-                        Edit
-                      </button>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(p)}>
-                        Delete
-                      </button>
+                    <td>
+                      <div className="row-actions">
+                        <button className="btn btn-outline btn-sm" onClick={() => openEdit(p)}>
+                          Edit
+                        </button>
+                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(p)}>
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

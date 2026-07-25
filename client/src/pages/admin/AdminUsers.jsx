@@ -77,21 +77,23 @@ function AdminUsers() {
                         </span>
                       </td>
                       <td>{new Date(u.createdAt).toLocaleDateString()}</td>
-                      <td className="row-actions">
-                        <button
-                          className="btn btn-outline btn-sm"
-                          onClick={() => toggleRole(u)}
-                          disabled={isMe}
-                        >
-                          {u.role === "admin" ? "Demote" : "Promote"}
-                        </button>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => handleDelete(u)}
-                          disabled={isMe}
-                        >
-                          Delete
-                        </button>
+                      <td>
+                        <div className="row-actions">
+                          <button
+                            className="btn btn-outline btn-sm"
+                            onClick={() => toggleRole(u)}
+                            disabled={isMe}
+                          >
+                            {u.role === "admin" ? "Demote" : "Promote"}
+                          </button>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() => handleDelete(u)}
+                            disabled={isMe}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
