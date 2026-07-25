@@ -9,9 +9,14 @@ const User = require("../models/User");
 
 /* ------------------------------ Dashboard ------------------------------ */
 
-// GET /api/admin/stats - Top-level KPIs + recent orders + revenue by day
+// GET /api/admin/stats?days=7|30|90 - Top-level KPIs + recent orders + revenue by day
 const getStats = async (req, res) => {
   try {
+    const allowedRanges = [7, 30, 90];
+    const days = allowedRanges.includes(Number(req.query.days))
+      ? Number(req.query.days)
+      : 7;
+
     const [totalProducts, totalUsers, totalOrders, revenueAgg, recentOrders] =
       await Promise.all([
         Product.countDocuments(),
@@ -27,12 +32,12 @@ const getStats = async (req, res) => {
           .populate("user", "name email"),
       ]);
 
-    // Revenue for the last 7 days (grouped by day, YYYY-MM-DD)
+    // Revenue grouped by day for the selected range
     const since = new Date();
-    since.setDate(since.getDate() - 6);
+    since.setDate(since.getDate() - (days - 1));
     since.setHours(0, 0, 0, 0);
 
-    const revenueByDay = await Order.aggregate([
+    const revenueAggByDay = await Order.aggregate([
       { $match: { createdAt: { $gte: since }, status: { $ne: "Cancelled" } } },
       {
         $group: {
@@ -41,8 +46,23 @@ const getStats = async (req, res) => {
           count: { $sum: 1 },
         },
       },
-      { $sort: { _id: 1 } },
     ]);
+    const revenueMap = new Map(revenueAggByDay.map((d) => [d._id, d]));
+
+    // Fill in every day in the range (even with no orders) so the chart
+    // renders as a continuous set of bars instead of only sparse days.
+    const revenueByDay = [];
+    for (let i = 0; i < days; i++) {
+      const d = new Date(since);
+      d.setDate(d.getDate() + i);
+      const key = d.toISOString().slice(0, 10);
+      const match = revenueMap.get(key);
+      revenueByDay.push({
+        _id: key,
+        total: match?.total || 0,
+        count: match?.count || 0,
+      });
+    }
 
     res.json({
       totalProducts,
@@ -51,6 +71,7 @@ const getStats = async (req, res) => {
       totalRevenue: revenueAgg[0]?.total || 0,
       recentOrders,
       revenueByDay,
+      rangeDays: days,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
