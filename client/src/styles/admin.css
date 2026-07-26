@@ -501,8 +501,15 @@
   resize: vertical;
 }
 
-/* Simple bar chart */
-.chart-bars {
+/* Simple bar chart - bars/ticks/labels are 3 separate rows so all bar
+   bottoms share one direct flex alignment edge (not per-column matching) */
+.chart-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.chart-bars-row {
   display: flex;
   align-items: flex-end;
   gap: 0.75rem;
@@ -510,18 +517,9 @@
   padding-top: 0.5rem;
 }
 
-.chart-bar-col {
+.chart-bar {
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  height: 100%;
-}
-
-.chart-bar {
-  width: 100%;
   min-height: 2px;
   background: linear-gradient(180deg, var(--color-primary), var(--color-primary-dark, #1d4ed8));
   border-radius: 6px 6px 0 0;
@@ -537,29 +535,50 @@
   border-radius: 2px;
 }
 
-.chart-bar-col {
-  justify-content: flex-end;
+.chart-ticks-row {
+  display: flex;
+  gap: 0.75rem;
 }
 
-.chart-bar-label {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  min-height: 1em;
-  white-space: nowrap;
-}
-
-.chart-bars-dense {
-  gap: 0.2rem;
-}
-
-.chart-bars-dense .chart-bar {
-  border-radius: 3px 3px 0 0;
+.chart-tick-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .chart-bar-tick {
   width: 1px;
   height: 7px;
-  background: var(--color-border);
+  background: #818385;
+}
+
+.chart-labels-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.chart-bar-label {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.chart-wrap-dense .chart-bars-row,
+.chart-wrap-dense .chart-ticks-row,
+.chart-wrap-dense .chart-labels-row {
+  gap: 0.2rem;
+}
+
+.chart-wrap-dense .chart-bar {
+  border-radius: 3px 3px 0 0;
+}
+
+.chart-wrap-dense .chart-bar-empty {
+  border-radius: 1px;
 }
 
 
@@ -641,9 +660,5 @@
 
   .row-actions {
     justify-content: flex-start;
-  }
-
-  .chart-bars {
-    height: 140px;
   }
 }

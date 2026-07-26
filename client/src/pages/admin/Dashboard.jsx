@@ -86,33 +86,44 @@ function Dashboard() {
             ) : stats.revenueByDay.every((d) => d.total === 0) ? (
               <p className="muted">No orders in this period.</p>
             ) : (
-              <div className={`chart-bars${range > 7 ? " chart-bars-dense" : ""}`}>
-                {stats.revenueByDay.map((d, i) => {
-                  const [, mm, dd] = d._id.split("-");
-                  const label = `${dd}-${mm}`;
-                  const showLabel = i % labelStep === 0;
-                  return (
-                    <div key={d._id} className="chart-bar-col">
-                      <div
-                        className={`chart-bar${d.total === 0 ? " chart-bar-empty" : ""}`}
-                        style={{
-                          height: d.total === 0 ? "2px" : `${(d.total / maxRevenue) * 100}%`,
-                        }}
-                        title={`${d._id}: ${formatCurrency(d.total)} (${d.count} order${d.count === 1 ? "" : "s"})`}
-                      ></div>
-                      <div
-                        className="chart-bar-tick"
-                        style={{ visibility: showLabel ? "visible" : "hidden" }}
-                      ></div>
-                      <div
-                        className="chart-bar-label"
-                        style={{ visibility: showLabel ? "visible" : "hidden" }}
-                      >
-                        {label}
-                      </div>
+              <div className={`chart-wrap${range > 7 ? " chart-wrap-dense" : ""}`}>
+                <div className="chart-bars-row">
+                  {stats.revenueByDay.map((d) => (
+                    <div
+                      key={d._id}
+                      className={`chart-bar${d.total === 0 ? " chart-bar-empty" : ""}`}
+                      style={{
+                        height: d.total === 0 ? "2px" : `${(d.total / maxRevenue) * 100}%`,
+                      }}
+                      title={`${d._id}: ${formatCurrency(d.total)} (${d.count} order${d.count === 1 ? "" : "s"})`}
+                    ></div>
+                  ))}
+                </div>
+                <div className="chart-ticks-row">
+                  {stats.revenueByDay.map((d, i) => (
+                    <div
+                      key={d._id}
+                      className="chart-tick-col"
+                      style={{ visibility: i % labelStep === 0 ? "visible" : "hidden" }}
+                    >
+                      <div className="chart-bar-tick"></div>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
+                <div className="chart-labels-row">
+                  {stats.revenueByDay.map((d, i) => {
+                    const [, mm, dd] = d._id.split("-");
+                    return (
+                      <div
+                        key={d._id}
+                        className="chart-bar-label"
+                        style={{ visibility: i % labelStep === 0 ? "visible" : "hidden" }}
+                      >
+                        {`${dd}-${mm}`}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
