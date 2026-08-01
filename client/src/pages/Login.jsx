@@ -26,8 +26,9 @@ function Login() {
     }
     try {
       setSubmitting(true);
-      await login(form.email.trim().toLowerCase(), form.password);
-      navigate(redirectTo, { replace: true });
+      const data = await login(form.email.trim().toLowerCase(), form.password);
+      const dest = data.role === "admin" ? "/admin" : redirectTo;
+      navigate(dest, { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {

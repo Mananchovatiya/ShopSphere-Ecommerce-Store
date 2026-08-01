@@ -95,6 +95,17 @@
   flex-wrap: wrap;
 }
 
+.pd-wishlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pd-wishlist-btn.active {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
 .pd-toast {
   background: #ecfdf5;
   color: var(--color-success);
