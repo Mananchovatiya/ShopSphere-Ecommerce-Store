@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useAuth } from "./context/AuthContext.jsx";
 
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -37,7 +38,8 @@ import AdminProfile from "./pages/admin/AdminProfile.jsx";
 // Root component - defines the layout and all routes
 function App() {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const { user } = useAuth();
+  const isAdminRoute = location.pathname.startsWith("/admin") || user?.role === "admin";
 
   return (
     <div className="app">
@@ -75,17 +77,19 @@ function App() {
           <Route
             path="/account"
             element={
-              <ProtectedRoute>
-                <AccountLayout />
-              </ProtectedRoute>
+              <CustomerRoute>
+                <ProtectedRoute>
+                  <AccountLayout />
+                </ProtectedRoute>
+              </CustomerRoute>
             }
           >
             <Route index element={<Profile />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="orders" element={<CustomerRoute><Orders /></CustomerRoute>} />
-            <Route path="orders/:id" element={<CustomerRoute><OrderDetail /></CustomerRoute>} />
-            <Route path="wishlist" element={<CustomerRoute><Wishlist /></CustomerRoute>} />
-            <Route path="addresses" element={<CustomerRoute><Addresses /></CustomerRoute>} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="orders/:id" element={<OrderDetail />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="addresses" element={<Addresses />} />
           </Route>
 
           {/* Admin dashboard - nested routes under /admin */}
