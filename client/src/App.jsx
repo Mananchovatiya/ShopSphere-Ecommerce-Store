@@ -39,8 +39,7 @@ import AdminProfile from "./pages/admin/AdminProfile.jsx";
 function App() {
   const location = useLocation();
   const { user } = useAuth();
-  const isAdminRoute = location.pathname.startsWith("/admin") || user?.role === "admin";
-
+  const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <div className="app">
       {!isAdminRoute && <Navbar />}
