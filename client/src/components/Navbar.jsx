@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useCart } from "../context/CartContext.jsx";
 import "../styles/navbar.css";
@@ -10,6 +10,20 @@ function Navbar() {
   const { itemsCount } = useCart();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -18,14 +32,14 @@ function Navbar() {
 
   return (
     <header className="navbar">
-      <div className="container navbar-inner">
+      <div className="container navbar-inner" ref={navRef}>
         <Link to="/" className="brand" onClick={() => setMenuOpen(false)}>
           <span className="brand-mark">S</span>
           <span className="brand-text">ShopSphere</span>
         </Link>
 
         <button
-          className="menu-btn"
+          className={`menu-btn ${menuOpen ? "open" : ""}`}
           aria-label="Toggle menu"
           onClick={() => setMenuOpen((v) => !v)}
         >
@@ -51,7 +65,12 @@ function Navbar() {
                   <span className="btn btn-outline btn-sm">Admin</span>
                 </NavLink>
               )}
-              <button className="btn btn-outline btn-sm" onClick={handleLogout}>
+              <button className="btn btn-outline btn-sm"
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleLogout();
+                }}
+              >
                 Logout
               </button>
             </>

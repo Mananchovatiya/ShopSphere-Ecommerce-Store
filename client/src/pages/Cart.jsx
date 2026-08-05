@@ -59,13 +59,6 @@ function Cart() {
               <div className="cart-item-total">
                 {formatPrice(it.price * it.quantity)}
               </div>
-              <button
-                className="cart-item-remove"
-                onClick={() => removeFromCart(it.product)}
-                aria-label="Remove item"
-              >
-                ✕
-              </button>
             </div>
           ))}
 
